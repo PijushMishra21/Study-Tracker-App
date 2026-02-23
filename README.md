@@ -3,6 +3,8 @@
 A Smart Self-Productivity-app focused on React application designed to help users track study time, sessions, manage subjects, and build consistent learning habits.
 
 ---
+<img width="482" height="424" alt="Screenshot 2026-02-23 110022" src="https://github.com/user-attachments/assets/b0d1c496-4e8b-4780-90ba-10e5981cac91" /><img width="492" height="579" alt="Screenshot 2026-02-23 110052" src="https://github.com/user-attachments/assets/0dedaa78-288d-41f1-999e-61395ce5d9f8" />
+
 
 ## 🚀 Live Demo
 🔗 https://study-tracker-app-red.vercel.app/
