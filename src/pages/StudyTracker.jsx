@@ -1,5 +1,6 @@
 import { useState,  } from "react";
 import Timer from '../componenets/Timer' ;
+import { useNavigate } from "react-router-dom";
 
 
 export default function StudyTracker() {
@@ -9,19 +10,21 @@ export default function StudyTracker() {
   const [error, setError] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const navigate = useNavigate();
+
   const [sessions, setSessions] = useState(() => {
     const saved = localStorage.getItem("sessions");
     return saved ? JSON.parse(saved) : [];
-  });
 
+  });
   // Handle add subject
   const handleAddSubjects = () => {
      if (subInput.trim() === "") {
-      setError('please enter your subjects')
+      setError('Please enter your subjects')
    }else{
       const  newSubject = {
       id : Date.now(),
-      name: subInput.trim(),
+      name: subInput.toUpperCase().trim(),
       time : 0,
     }
       setSubjects(prev => [...prev, newSubject]);
@@ -74,13 +77,19 @@ export default function StudyTracker() {
     return `${mins}:${secs}`;
   };
 
+
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <section className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-bold text-blue-600">📚 Study Tracker App</h1>
-          <button className="text-sm text-red-600 underline">Logout</button>
-        </div>
+        <header className="flex justify-between items-center mb-4">
+          <h1 className="text-xl font-bold text-black-600">📚 StudyTime Tracker App</h1>
+          <button className="px-4 py-2 text-sm font-semibold 
+          border border-red-500 text-red-600 
+          rounded-lg 
+          hover:bg-red-500 hover:text-white 
+          transition duration-300"
+          onClick={() => navigate("/")}>Logout</button>
+        </header>
 
         {/* Subject Input */}
         <div className="text-center mb-6 space-y-2">
@@ -91,7 +100,7 @@ export default function StudyTracker() {
             onChange={(e) => setSubInput(e.target.value)}
             className="border p-2 w-full rounded"
           />
-  {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             onClick={handleAddSubjects}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
@@ -101,6 +110,7 @@ export default function StudyTracker() {
         </div>
 
         {/* Subject List */}
+     <main>   
         <div className="mb-6">
           <h2 className="text-lg font-semibold mb-2">🎯 Subjects</h2>
           { subjects.length === 0 ? (
@@ -112,8 +122,8 @@ export default function StudyTracker() {
                   key={sub.id}
                   className={`p-2 rounded flex justify-between items-center cursor-pointer ${
                     selectedSubjectId === sub.id
-                      ? "bg-blue-100 border border-blue-400"
-                      : "bg-gray-100"
+                      ? "bg-blue-100 border border-gray-400"
+                      : "bg-green-100"
                   }`}
                   onClick={() => setSelectedSubjectId(sub.id)}
                 >
@@ -136,7 +146,9 @@ export default function StudyTracker() {
         </div>
 
         {/* Timer */}
-        <Timer isRunning={isRunning} onTick={setCurrentTime} />
+        <Timer 
+        isRunning={isRunning} 
+        onTick={setCurrentTime} />
 
         {/* Controls */}
         <div className="space-x-4 text-center mt-4">
@@ -155,13 +167,12 @@ export default function StudyTracker() {
             💾 Save Session
           </button>
         </div>
-
+</main>
         {/* Session List */}
+
         <hr className="my-6" />
 
-        
-        
-        
+        <footer>
          <h2 className="text-lg font-semibold mb-2">📅 Today Sessions</h2>
         {sessions.length === 0 ? (
           <p className="text-gray-500">No sessions yet.</p>
@@ -186,9 +197,10 @@ export default function StudyTracker() {
               );
             })}
           </ol>
-        )} 
+        )}
+        </footer> 
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -9,7 +9,7 @@ export default function Timer({ isRunning, onTick }) {
       interval = setInterval(() => {
         setSeconds((prev) => {
           const updated = prev + 1;
-          onTick(updated); //
+          onTick(updated); 
           return updated;
         });
       }, 1000);
