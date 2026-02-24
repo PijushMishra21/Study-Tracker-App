@@ -122,8 +122,10 @@ This project helped me strengthen:
 **Pijush Kanti Mishra**  
 Frontend Developer
 
-🌐 Portfolio: https://your-portfolio-link  
-💼 LinkedIn: https://linkedin.com/in/your-link  
+🌐 Portfolio:(https://pijushmishra21.github.io/Portfolio_p/
+)
+💼 LinkedIn:  https://www.linkedin.com/in/pijushmishrafrontenddeveloper/
+
 🐙 GitHub: https://github.com/PijushMishra21
 
 ---
