@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { saveToken } from "../auth/auth";
 import api from './../auth/api';
+import { GoogleLogin } from '@react-oauth/google';
+
 
 export default function Login() {
   const [email, setEmail] = useState(''); 
@@ -14,7 +16,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    navigate("./StudyTracker");
+    navigate("/StudyTracker");
     console.log('clicked');
     try {
       const res = await api.post("/login", { email, password });
@@ -27,6 +29,16 @@ export default function Login() {
     }
   };
 
+  const handleLoginSuccess = async(credentialResponse) => {
+     try {
+      console.log("Google Token:", credentialResponse.credential);
+
+    navigate("./StudyTracker");
+
+  } catch (error) {
+    console.error("Google login failed", error);
+  }
+  };
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -78,6 +90,10 @@ export default function Login() {
             disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
+          <div>
+            or
+          </div>
+          <GoogleLogin onSuccess={handleLoginSuccess} onError={() => console.log('Login Failed')}/>
         </footer>
         </form>
         </main>
